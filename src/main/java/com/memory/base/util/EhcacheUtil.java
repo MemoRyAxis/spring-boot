@@ -13,7 +13,7 @@ public class EhcacheUtil {
 
 	static {
 		cacheManager = CacheManager.create();
-		defaultCache = new Cache(DEFAULT_CACHE, 0, true, false, 60, 60);
+		defaultCache = new Cache(DEFAULT_CACHE, 0, true, false, 60, 30);
 		cacheManager.addCache(defaultCache);
 		currentCache = DEFAULT_CACHE;
 	}

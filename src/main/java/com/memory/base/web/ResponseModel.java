@@ -1,76 +1,39 @@
 package com.memory.base.web;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class ResponseModel implements Serializable {
 
-	private static final long serialVersionUID = -8603951768171144375L;
+    private static final long serialVersionUID = -8603951768171144375L;
 
-	private int code;
+    private int code;
 
-	private String message;
+    private String message;
 
-	private Object data;
+    private Object data;
 
-	class ResponseList implements Serializable {
+    public int getCode() {
+        return code;
+    }
 
-		private static final long serialVersionUID = 3226478575123155281L;
+    public void setCode(int code) {
+        this.code = code;
+    }
 
-		private int count;
+    public String getMessage() {
+        return message;
+    }
 
-		private int currentPage;
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-		private List<Object> list;
+    public Object getData() {
+        return data;
+    }
 
-		public int getCount() {
-			return count;
-		}
-
-		public void setCount(int count) {
-			this.count = count;
-		}
-
-		public int getCurrentPage() {
-			return currentPage;
-		}
-
-		public void setCurrentPage(int currentPage) {
-			this.currentPage = currentPage;
-		}
-
-		public List<Object> getList() {
-			return list;
-		}
-
-		public void setList(List<Object> list) {
-			this.list = list;
-		}
-
-	}
-
-	public int getCode() {
-		return code;
-	}
-
-	public void setCode(int code) {
-		this.code = code;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public Object getData() {
-		return data;
-	}
-
-	public void setData(Object data) {
-		this.data = data;
-	}
+    public void setData(Object data) {
+        this.data = data;
+    }
 
 }
