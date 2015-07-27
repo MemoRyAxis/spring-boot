@@ -6,12 +6,12 @@
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script>
 	$(function() {
-		var host = "me:8080/user2/";
+		var host = "http:localhost:8080/user2/";
 	});
 	
 	function insertUser() {
 		$.ajax({
-			url: host,
+			url: "http:localhost:8080/user2/",
 			type: "POST",
 			data: $("#form1").serialize(),
 			success: function(response) {
@@ -22,7 +22,7 @@
 
 	function updateUser() {
 		$.ajax({
-			url: host + $("#form2 input[name='id']"),
+			url: "http:localhost:8080/user2/" + $("#form2 input[name='id']"),
 			type: "PUT",
 			data: $("#form2").serialize(),
 			success: function(response) {
@@ -33,7 +33,7 @@
 
 	function deleteUser() {
 		$.ajax({
-			url: host + $("#form3 input[name='id']"),
+			url: "http:localhost:8080/user2/" + $("#form3 input[name='id']"),
 			type: "DELETE",
 			success: function(response) {
 				console(response);
@@ -43,7 +43,7 @@
 
 	function getUser() {
 		$.ajax({
-			url: host + $("#form4 input[name='id']"),
+			url: "http:localhost:8080/user2/" + $("#form4 input[name='id']"),
 			type: "GET",
 			success: function(response) {
 				console(response);
@@ -53,7 +53,7 @@
 
 	function getUsers() {
 		$.ajax({
-			url: host,
+			url: "http:localhost:8080/user2/",
 			type: "GET",
 			success: function(response) {
 				console(response);
@@ -68,7 +68,7 @@
 	<form id="form1" action="">
 		<input type="text" name="username" value="tom" />
 		<input type="text" name="password" value="tom" />
-		<a href="javascript:updateUser()">insert</a>
+		<a href="javascript:insertUser()">insert</a>
 	</form>
 	
 	<h1>update user[put]</h1>
@@ -95,6 +95,7 @@
 	<form id="form5" action="">
 		<a href="javascript:getUsers()">get</a>
 	</form>
+	
 	
 	
 	
