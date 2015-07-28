@@ -3,17 +3,14 @@ package com.memory.user.controller;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.Map.Entry;
-
-import javax.servlet.http.HttpServletResponse;
+import java.util.Set;
 
 import net.sf.ehcache.Element;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.memory.base.util.EhcacheUtil;
@@ -28,74 +25,70 @@ import com.memory.user.po.User;
 @RequestMapping(value = "/user2")
 public class User2Controller extends BaseController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseModel getAll() {
-        ResponseModel rm = new ResponseModel();
+  @RequestMapping(value = "/", method = RequestMethod.GET)
+  public ResponseModel getAll() {
+    ResponseModel rm = new ResponseModel();
 
-        try {
-            List<User> userList = new ArrayList<User>();
+    try {
+      List<User> userList = new ArrayList<User>();
 
-            Set<Entry<Object, Element>> cacheSet = EhcacheUtil
-                    .getCurrentCache()
-                    .getAll(EhcacheUtil.getCurrentCache().getKeys()).entrySet();
-            Iterator<Entry<Object, Element>> iterator = cacheSet.iterator();
-            while (iterator.hasNext()) {
-                User user = (User) iterator.next().getValue().getObjectValue();
-                userList.add(user);
-            }
+      Set<Entry<Object, Element>> cacheSet =
+          EhcacheUtil.getCurrentCache().getAll(EhcacheUtil.getCurrentCache().getKeys()).entrySet();
+      Iterator<Entry<Object, Element>> iterator = cacheSet.iterator();
+      while (iterator.hasNext()) {
+        User user = (User) iterator.next().getValue().getObjectValue();
+        userList.add(user);
+      }
 
-            ResponseList rl = new ResponseList();
-            rl.setCount(userList.size());
-            rl.setCurrentPage(1);
-            rl.setList(userList);
+      ResponseList rl = new ResponseList();
+      rl.setCount(userList.size());
+      rl.setCurrentPage(1);
+      rl.setList(userList);
 
-            rm = genResponseModel(ResponseCode.GET_SUCCESS, rl);
-        } catch (Exception e) {
-            rm = genResponseModel(ResponseCode.GET_FAIL);
-        }
-
-        return rm;
+      rm = genResponseModel(ResponseCode.GET_SUCCESS, rl);
+    } catch (Exception e) {
+      rm = genResponseModel(ResponseCode.GET_FAIL);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseModel get(@PathVariable("id") long id) {
-        ResponseModel rm = new ResponseModel();
+    return rm;
+  }
 
-        try {
-            User user = (User) EhcacheUtil.get(id).getObjectValue();
-            genResponseModel(ResponseCode.GET_SUCCESS, user);
-        } catch (Exception e) {
-            rm = genResponseModel(ResponseCode.GET_FAIL);
-        }
+  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+  public ResponseModel get(@PathVariable("id") long id) {
+    ResponseModel rm = new ResponseModel();
 
-        return rm;
+    try {
+      User user = (User) EhcacheUtil.get(id).getObjectValue();
+      genResponseModel(ResponseCode.GET_SUCCESS, user);
+    } catch (Exception e) {
+      rm = genResponseModel(ResponseCode.GET_FAIL);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseModel insert(@RequestParam("user") User user, HttpServletResponse response) {
+    return rm;
+  }
 
-        user.setId(NiceUtil.getIncreaseLong());
-        EhcacheUtil.put(new Element(user.getId(), user));
+  @RequestMapping(value = "/", method = RequestMethod.POST)
+  public ResponseModel insert(User user) {
 
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        
-        return genResponseModel(ResponseCode.GET_SUCCESS);
-    }
+    user.setId(NiceUtil.getIncreaseLong());
+    EhcacheUtil.put(new Element(user.getId(), user));
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseModel update(@PathVariable("id") long id,
-            @RequestParam("user") User user) {
+    return genResponseModel(ResponseCode.GET_SUCCESS);
+  }
 
-        EhcacheUtil.put(new Element(id, user));
+  @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+  public ResponseModel update(@PathVariable("id") long id, User user) {
 
-        return genResponseModel(ResponseCode.PUT_SUCCESS);
-    }
+    EhcacheUtil.put(new Element(id, user));
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseModel delete(@PathVariable("id") long id) {
+    return genResponseModel(ResponseCode.PUT_SUCCESS);
+  }
 
-        EhcacheUtil.remove(id);
+  @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+  public ResponseModel delete(@PathVariable("id") long id) {
 
-        return genResponseModel(ResponseCode.DELETE_SUCCESS);
-    }
+    EhcacheUtil.remove(id);
+
+    return genResponseModel(ResponseCode.DELETE_SUCCESS);
+  }
 }

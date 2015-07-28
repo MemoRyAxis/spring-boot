@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>user test</title>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+	$(function() {
+		var host = "http:localhost:8080/user2/";
+	});
+	
+	function insertUser() {
+		$.ajax({
+			url: "http:localhost:8080/user2/",
+			data: $("#form1").serialize(),
+			type: "POST",
+			success: function(response) {
+				console.info(response);
+			}
+		});
+	}
+
+	function updateUser() {
+		$.ajax({
+			url: "http:localhost:8080/user2/" + $("#form2 input[name='id']").val(),
+			type: "PUT",
+			data: $("#form2").serialize(),
+			success: function(response) {
+				console.info(response);
+			}
+		});
+	}
+
+	function deleteUser() {
+		$.ajax({
+			url: "http:localhost:8080/user2/" + $("#form3 input[name='id']").val(),
+			type: "DELETE",
+			success: function(response) {
+				console.info(response);
+			}
+		});
+	}
+
+	function getUser() {
+		$.ajax({
+			url: "http:localhost:8080/user2/" + $("#form4 input[name='id']").val(),
+			type: "GET",
+			success: function(response) {
+				console.info(response);
+			}
+		});
+	}
+
+	function getUsers() {
+		$.ajax({
+			url: "http:localhost:8080/user2/",
+			type: "GET",
+			success: function(response) {
+				console.info(response);
+			}
+		});
+	}
+</script>
+</head>
+<body>
+
+	<h1>insert user[post]</h1>
+	<form id="form1" action="">
+		<input type="hidden" name="id" value="0" />
+		<input type="text" name="username" value="tom" />
+		<input type="text" name="password" value="tom" />
+		<a href="javascript:insertUser()">insert</a>
+	</form>
+	
+	<h1>update user[put]</h1>
+	<form id="form2" action="">
+		<input type="text" name="id" value="" />
+		<input type="text" name="username" value="tom2" />
+		<input type="text" name="password" value="tom2" />
+		<a href="javascript:updateUser()">update</a>
+	</form>
+	
+	<h1>delete user[delete]</h1>
+	<form id="form3" action="">
+		<input type="text" name="id" value="" />
+		<a href="javascript:deleteUser()">delete</a>
+	</form>
+
+	<h1>get user[get]</h1>
+	<form id="form4" action="">
+		<input type="text" name="id" value="" />
+		<a href="javascript:getUser()">get</a>
+	</form>
+	
+	<h1>get users[get]</h1>
+	<form id="form5" action="">
+		<a href="javascript:getUsers()">get</a>
+	</form>
+	
+	
+	
+	
+	<!-- <input type="" name="" value="" /> -->
+</body>
+</html>

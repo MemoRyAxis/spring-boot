@@ -6,13 +6,13 @@ public enum ResponseCode {
 
     QUERY_SUCCESS(602, "查询成功"), QUERY_FAIL(603, "查询失败"),
 
-    GET_SUCCESS(701, "查询成功"), GET_FAIL(702, "查询失败"),
+    GET_SUCCESS(700, "查询成功"), GET_FAIL(701, "查询失败"),
 
-    POST_SUCCESS(701, "插入成功"), POST_FAIL(702, "插入失败"),
+    POST_SUCCESS(710, "插入成功"), POST_FAIL(711, "插入失败"),
 
-    PUT_SUCCESS(701, "更新成功"), PUT_FAIL(702, "更新失败"),
+    PUT_SUCCESS(720, "更新成功"), PUT_FAIL(721, "更新失败"),
 
-    DELETE_SUCCESS(701, "删除成功"), DELETE_FAIL(702, "删除失败"),
+    DELETE_SUCCESS(730, "删除成功"), DELETE_FAIL(731, "删除失败"),
 
     X(999, "我是可爱的小酱油");
 

@@ -5,45 +5,47 @@ import java.util.Date;
 
 public class BaseModel implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    protected Long createBy;
 
-    protected Long updateBy;
+  protected Long createBy;
 
-    protected Date createTime;
+  protected Long updateBy;
 
-    protected Date updateTime;
+  protected Date createTime;
 
-    public Long getCreateBy() {
-        return createBy;
-    }
+  protected Date updateTime;
 
-    public void setCreateBy(Long createBy) {
-        this.createBy = createBy;
-    }
+  public Long getCreateBy() {
+    return createBy;
+  }
 
-    public Long getUpdateBy() {
-        return updateBy;
-    }
+  public void setCreateBy(Long createBy) {
+    this.createBy = createBy;
+  }
 
-    public void setUpdateBy(Long updateBy) {
-        this.updateBy = updateBy;
-    }
+  public Long getUpdateBy() {
+    return updateBy;
+  }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+  public void setUpdateBy(Long updateBy) {
+    this.updateBy = updateBy;
+  }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+  public Date getCreateTime() {
+    return createTime;
+  }
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
+  }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+  public Date getUpdateTime() {
+    return updateTime;
+  }
+
+  public void setUpdateTime(Date updateTime) {
+    this.updateTime = updateTime;
+  }
+ 
 }

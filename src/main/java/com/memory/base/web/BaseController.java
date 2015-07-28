@@ -1,30 +1,42 @@
 package com.memory.base.web;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public abstract class BaseController {
 
-    protected ResponseModel genResponseModel(ResponseCode code) {
-        return genResponseModel(code, code.getMsg());
-    }
+  private static Map<String, Object> dataMap = new HashMap<String, Object>(1);
 
-    protected ResponseModel genResponseModel(ResponseCode code, String message) {
-        return genResponseModel(code, message, null);
-    }
+  protected ResponseModel genResponseModel(ResponseCode code) {
+    return genResponseModel(code, code.getMsg(), null);
+  }
 
-    protected ResponseModel genResponseModel(ResponseCode code, Object data) {
-        return genResponseModel(code, code.getMsg(), data);
-    }
+  protected ResponseModel genResponseModel(ResponseCode code, ResponseList list) {
+    return genResponseModel(code, code.getMsg(), list);
+  }
 
-    protected ResponseModel genResponseModel(ResponseCode code,
-            ResponseList list) {
-        return genResponseModel(code, code.getMsg(), list);
-    }
+  protected ResponseModel genResponseModel(ResponseCode code, Object obj) {
+    return genResponseModel(code, code.getMsg(), obj);
+  }
 
-    protected ResponseModel genResponseModel(ResponseCode code, String message,
-            Object data) {
-        ResponseModel responseModel = new ResponseModel();
-        responseModel.setCode(code.getCode());
-        responseModel.setMessage(message);
-        responseModel.setData(data);
-        return responseModel;
+  private ResponseModel genResponseModel(ResponseCode code, String msg, Object data) {
+    ResponseModel responseModel = new ResponseModel();
+    responseModel.setCode(code.getCode());
+    responseModel.setMessage(msg);
+    if (data == null) {
+      dataMap = null;
+    } else if (data instanceof ResponseList) {
+      responseModel.setData(data);
+    } else if (data instanceof Map) {
+      responseModel.setData(data);
+    } else if (data instanceof List) {
+      dataMap.put("list", data);
+      responseModel.setData(dataMap);
+    } else {
+      dataMap.put("obj", data);
+      responseModel.setData(dataMap);
     }
+    return responseModel;
+  }
 }
