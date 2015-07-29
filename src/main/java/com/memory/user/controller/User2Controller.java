@@ -73,7 +73,7 @@ public class User2Controller extends BaseController {
     user.setId(NiceUtil.getIncreaseLong());
     EhcacheUtil.put(new Element(user.getId(), user));
 
-    return genResponseModel(ResponseCode.GET_SUCCESS);
+    return genResponseModel(ResponseCode.POST_SUCCESS);
   }
 
   @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
