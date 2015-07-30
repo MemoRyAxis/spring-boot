@@ -19,7 +19,7 @@ import com.memory.base.web.BaseController;
 import com.memory.base.web.ResponseCode;
 import com.memory.base.web.ResponseList;
 import com.memory.base.web.ResponseModel;
-import com.memory.user.po.User;
+import com.memory.user.domain.User;
 
 @RestController
 @RequestMapping(value = "/user2")
