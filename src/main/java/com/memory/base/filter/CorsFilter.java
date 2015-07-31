@@ -10,8 +10,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Component;
-
 /**
  *
  * https://spring.io/guides/gs/rest-service-cors/
@@ -20,12 +18,13 @@ import org.springframework.stereotype.Component;
  * differently for a given client and/or resource being requested. Or it may not set the headers at
  * all in certain cases.
  *
- * @author qizheng.ma@100credit.com
+ * @author memoryaxis
  * @date Jul 28, 2015
  * 
  */
-@Component
-public class CORSFilter implements Filter {
+
+// @Component
+public class CorsFilter implements Filter {
 
   public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
       throws IOException, ServletException {

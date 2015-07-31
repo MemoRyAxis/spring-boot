@@ -1,5 +1,7 @@
 package com.memory.user.domain;
 
+import javax.validation.constraints.NotNull;
+
 import com.memory.base.model.BaseModel;
 
 public class User extends BaseModel {
@@ -8,8 +10,10 @@ public class User extends BaseModel {
 
     private long id;
 
+    @NotNull
     private String username;
 
+    @NotNull
     private String password;
 
     public long getId() {

@@ -15,27 +15,27 @@ public class UserService {
   @Autowired
   UserMapper userMapper;
 
-  List<User> getAll(Map<String, Object> params) {
+  public List<User> getAll(Map<String, Object> params) {
     return userMapper.getAll(params);
   }
 
-  int getCount(Map<String, Object> params) {
+  public int getCount(Map<String, Object> params) {
     return userMapper.getCount(params);
   }
 
-  User getById(long id) {
+  public User getById(long id) {
     return userMapper.getById(id);
   }
 
-  int add(User user) {
-    return userMapper.add(user);
+  public long add(User user) {
+    return userMapper.add(user) > 0 ? user.getId() : 0L;
   }
 
-  int delById(long id) {
-    return userMapper.delById(id);
+  public boolean delById(long id) {
+    return userMapper.delById(id) > 0 ? true : false;
   }
 
-  int update(User user) {
-    return userMapper.update(user);
+  public boolean update(User user) {
+    return userMapper.update(user) > 0 ? true : false;
   }
 }
