@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.memory.deposit.domain.CostDetail">
+	<resultMap id="CostDetail" type="com.memory.deposit.domain.CostDetail">
+		<id property="id" column="id" jdbcType="NUMERIC"/>
+		<result property="costType" column="cost_type" jdbcType="NUMERIC"/>
+		<result property="cost" column="cost" jdbcType="NUMERIC"/>
+		<result property="remark" column="remark" jdbcType="VARCHAR"/>
+		<result property="costDate" column="cost_date" jdbcType="TIMESTAMP"/>
+		<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+	</resultMap>
+
+	<sql id="columns">
+		id,cost_type,cost,remark,cost_date,create_time
+	</sql>
+	
+	<sql id="dynamicWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(id)"> AND id  =#{id} </if>
+			<if test="@Ognl@isNotEmpty(costType)"> AND cost_type  =#{costType} </if>
+			<if test="@Ognl@isNotEmpty(cost)"> AND cost  =#{cost} </if>
+			<if test="@Ognl@isNotEmpty(remark)"> AND remark  LIKE #{remark}  </if>
+			<if test="@Ognl@isNotEmpty(costDate)"> AND cost_date  =#{costDate} </if>
+			<if test="@Ognl@isNotEmpty(createTime)"> AND create_time  =#{createTime} </if>
+		</where>
+	</sql>
+
+	<insert id="add" parameterType="com.memory.deposit.domain.CostDetail">
+		INSERT INTO cost_detail
+		(id,cost_type,cost,remark,cost_date,create_time)
+		VALUES
+		(#{id,jdbcType=NUMERIC}, #{costType,jdbcType=NUMERIC}, #{cost,jdbcType=NUMERIC}, #{remark,jdbcType=VARCHAR}, #{costDate,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	
+	<delete id="delById" parameterType="java.lang.Long">
+		DELETE FROM cost_detail 
+		WHERE
+		id=#{id}
+	</delete>
+	
+	<update id="update" parameterType="com.memory.deposit.domain.CostDetail">
+		UPDATE cost_detail SET
+		cost_type=#{costType,jdbcType=NUMERIC},
+		cost=#{cost,jdbcType=NUMERIC},
+		remark=#{remark,jdbcType=VARCHAR},
+		cost_date=#{costDate,jdbcType=TIMESTAMP},
+		create_time=#{createTime,jdbcType=TIMESTAMP}
+		WHERE
+		id=#{id}
+	</update>
+		    
+	<select id="getById" parameterType="java.lang.Long" resultMap="CostDetail">
+		SELECT <include refid="columns"/>
+		FROM cost_detail
+		WHERE
+		id=#{id}
+	</select>
+	
+	<select id="getAll" resultMap="CostDetail">
+		SELECT <include refid="columns"/>
+		FROM cost_detail   
+		<include refid="dynamicWhere" />
+		<if test="@Ognl@isNotEmpty(orderField)">
+		order by ${orderField} ${orderSeq}
+		</if>
+		<if test="@Ognl@isEmpty(orderField)">
+		order by id  desc
+		</if>
+	</select>
+</mapper>

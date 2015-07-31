@@ -14,7 +14,17 @@ public class CostDetail extends BaseModel {
 
   private double cost;
 
+  private String remark;
+
   private Date costData;
+
+  public String getRemark() {
+    return remark;
+  }
+
+  public void setRemark(String remark) {
+    this.remark = remark;
+  }
 
   public long getId() {
     return id;

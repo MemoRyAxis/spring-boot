@@ -10,7 +10,17 @@ public class CostType extends BaseModel {
   
   private long superId;
   
+  private String alias;
+  
   private String desc;
+
+  public String getAlias() {
+    return alias;
+  }
+
+  public void setAlias(String alias) {
+    this.alias = alias;
+  }
 
   public long getId() {
     return id;
