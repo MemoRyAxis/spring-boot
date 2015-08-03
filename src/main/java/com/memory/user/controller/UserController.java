@@ -2,8 +2,14 @@ package com.memory.user.controller;
 
 import java.util.List;
 
+import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -65,11 +71,16 @@ public class UserController extends BaseController {
     return rm;
   }
 
-  @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-  public ResponseModel update(@PathVariable("id") long id, User user) {
+  @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseModel update(
+      @RequestBody(required = false) User user) {
     ResponseModel rm = new ResponseModel();
-
-    if (userService.getById(id) != null) {
+    
+//    User user = new User();
+//    WebDataBinder dataBinder = new WebDataBinder(user);
+//    dataBinder.bind(new MutablePropertyValues(form.toSingleValueMap()));
+    
+/*    if (userService.getById(id) != null) {
       user.setId(id);
       rm =
           userService.add(user) != 0L
@@ -82,7 +93,7 @@ public class UserController extends BaseController {
               ? genResponseModel(ResponseCode.PUT_SUCCESS)
               : genResponseModel(ResponseCode.PUT_FAIL);
     }
-
+*/
     return rm;
   }
 

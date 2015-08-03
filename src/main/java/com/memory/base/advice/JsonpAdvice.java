@@ -1,4 +1,4 @@
-package com.memory.user.controller;
+package com.memory.base.advice;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;

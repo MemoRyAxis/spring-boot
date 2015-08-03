@@ -9,6 +9,23 @@
 		var host = "http:localhost:8080/user/";
 	});
 	
+	$.fn.serializeObject = function()
+	{
+	   var o = {};
+	   var a = this.serializeArray();
+	   $.each(a, function() {
+	       if (o[this.name]) {
+	           if (!o[this.name].push) {
+	               o[this.name] = [o[this.name]];
+	           }
+	           o[this.name].push(this.value || '');
+	       } else {
+	           o[this.name] = this.value || '';
+	       }
+	   });
+	   return o;
+	};
+	
 	function insertUser() {
 		$.ajax({
 			url: "http:localhost:8080/user/",
@@ -24,7 +41,15 @@
 		$.ajax({
 			url: "http:localhost:8080/user/" + $("#form2 input[name='id']").val(),
 			type: "PUT",
-			data: $("#form2").serialize(),
+			contentType : "application/json",
+			// data: $("#form2").serialize(),
+			// "id2=" + $("#form2 input[name='id']").val() + 
+			data: JSON.stringify($("#form2").serializeObject()),
+			// data: $("#form2").serializeObject(),
+			// data: "{\"id\":3,\"form\":{\"id\":3,\"password\":\"3\",\"username\":\"3\"}}",
+			beforeSend: function() {
+				//alert("id=" + $("#form2 input[name='id']").val() + "&form='" + JSON.stringify($("#form2").serializeObject()) + "'");
+			},
 			success: function(response) {
 				console.info(response);
 			}
