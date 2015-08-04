@@ -6,6 +6,19 @@ import java.util.Map;
 
 public abstract class BaseController {
 
+  private Map<String, Object> decodeRequest() {
+    // TODO
+    return null;
+  }
+
+  private final static String PATH = "/";
+  private final static String ID_PATH_VARIABLE = "{id}";
+  protected final static String FIND_BY_ID_REQUEST = PATH + ID_PATH_VARIABLE;
+  protected final static String FIND_REQUEST = PATH;
+  protected final static String INSERT_REQUEST = PATH;
+  protected final static String UPDATE_REQUEST = PATH;
+  protected final static String DELETE_REQUEST = PATH + ID_PATH_VARIABLE;
+
   private static Map<String, Object> dataMap = new HashMap<String, Object>(1);
 
   protected ResponseModel genResponseModel(ResponseCode code) {

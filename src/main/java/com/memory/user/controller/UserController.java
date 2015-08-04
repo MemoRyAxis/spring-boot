@@ -2,12 +2,7 @@ package com.memory.user.controller;
 
 import java.util.List;
 
-import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +23,7 @@ public class UserController extends BaseController {
   @Autowired
   UserService userService;
 
-  @RequestMapping(value = "/", method = RequestMethod.GET)
+  @RequestMapping(value = FIND_REQUEST, method = RequestMethod.GET)
   public ResponseModel getAll(User user) {
     ResponseModel rm = new ResponseModel();
 
@@ -44,7 +39,7 @@ public class UserController extends BaseController {
     return rm;
   }
 
-  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+  @RequestMapping(value = FIND_BY_ID_REQUEST, method = RequestMethod.GET)
   public ResponseModel get(@PathVariable("id") long id) {
     ResponseModel rm = new ResponseModel();
 
@@ -57,7 +52,7 @@ public class UserController extends BaseController {
     return rm;
   }
 
-  @RequestMapping(value = "/", method = RequestMethod.POST)
+  @RequestMapping(value = INSERT_REQUEST, method = RequestMethod.POST)
   public ResponseModel insert(User user) {
     ResponseModel rm = new ResponseModel();
 
@@ -71,7 +66,8 @@ public class UserController extends BaseController {
     return rm;
   }
 
-  @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+//  @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @RequestMapping(value = UPDATE_REQUEST, method = RequestMethod.PUT)
   public ResponseModel update(
       @RequestBody(required = false) User user) {
     ResponseModel rm = new ResponseModel();
@@ -80,25 +76,23 @@ public class UserController extends BaseController {
 //    WebDataBinder dataBinder = new WebDataBinder(user);
 //    dataBinder.bind(new MutablePropertyValues(form.toSingleValueMap()));
     
-/*    if (userService.getById(id) != null) {
-      user.setId(id);
+    if (userService.getById(user.getId()) == null) {
       rm =
           userService.add(user) != 0L
               ? genResponseModel(ResponseCode.POST_SUCCESS)
               : genResponseModel(ResponseCode.POST_FAIL);
     } else {
-      user.setId(id);
       rm =
           userService.update(user)
               ? genResponseModel(ResponseCode.PUT_SUCCESS)
               : genResponseModel(ResponseCode.PUT_FAIL);
     }
-*/
+
     return rm;
   }
 
-  @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-  public ResponseModel delete(@PathVariable("id") long id) {
+  @RequestMapping(value = DELETE_REQUEST, method = RequestMethod.DELETE)
+  public ResponseModel delete(@PathVariable long id) {
 
     return userService.delById(id)
         ? genResponseModel(ResponseCode.DELETE_SUCCESS)
