@@ -3,6 +3,7 @@ package com.memory.user.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,7 @@ public class UserService {
   }
 
   public long add(User user) {
+    user.setPassword(DigestUtils.md5Hex(user.getPassword()));
     return userMapper.add(user) > 0 ? user.getId() : 0L;
   }
 
