@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -38,8 +39,10 @@ public class MySQLConfig {
 
     SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
     sqlSessionFactoryBean.setDataSource(getDataSource());
+    sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
     PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-    sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/com/memory/*/mapper/*.xml"));
+    sqlSessionFactoryBean.setMapperLocations(resolver
+        .getResources("classpath:/com/memory/*/mapper/*.xml"));
     return sqlSessionFactoryBean.getObject();
   }
 }

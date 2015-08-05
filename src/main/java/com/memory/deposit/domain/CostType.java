@@ -12,7 +12,7 @@ public class CostType extends BaseModel {
   
   private String alias;
   
-  private String desc;
+  private String remark;
 
   public String getAlias() {
     return alias;
@@ -38,11 +38,11 @@ public class CostType extends BaseModel {
     this.superId = superId;
   }
 
-  public String getDesc() {
-    return desc;
+  public String getRemark() {
+    return remark;
   }
 
-  public void setDesc(String desc) {
-    this.desc = desc;
+  public void setRemark(String remark) {
+    this.remark = remark;
   }
 }

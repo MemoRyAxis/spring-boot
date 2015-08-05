@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.memory.deposit.persistence.CostTypeMapper">
+	<resultMap id="CostType" type="com.memory.deposit.domain.CostType">
+		<id property="id" column="id" jdbcType="NUMERIC"/>
+		<result property="superId" column="super_id" jdbcType="NUMERIC"/>
+		<result property="alias" column="alias" jdbcType="VARCHAR"/>
+		<result property="remark" column="remark" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<sql id="columns">
+		id,super_id,alias,remark
+	</sql>
+	
+	<sql id="dynamicWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(id)"> AND id  =#{id} </if>
+			<if test="@Ognl@isNotEmpty(superId)"> AND super_id  =#{superId} </if>
+			<if test="@Ognl@isNotEmpty(alias)"> AND alias  LIKE #{alias}  </if>
+			<if test="@Ognl@isNotEmpty(remark)"> AND remark  LIKE #{remark}  </if>
+		</where>
+	</sql>
+
+	<insert id="add" parameterType="com.memory.deposit.domain.CostType" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO cost_type
+		(id,super_id,alias,remark)
+		VALUES
+		(#{id,jdbcType=NUMERIC}, #{superId,jdbcType=NUMERIC}, #{alias,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+	</insert>
+	
+	<delete id="delById" parameterType="java.lang.Long">
+		DELETE FROM cost_type 
+		WHERE
+		id=#{id}
+	</delete>
+	
+	<update id="update" parameterType="com.memory.deposit.domain.CostType">
+		UPDATE cost_type SET
+		super_id=#{superId,jdbcType=NUMERIC},
+		alias=#{alias,jdbcType=VARCHAR},
+		remark=#{remark,jdbcType=VARCHAR}
+		WHERE
+		id=#{id}
+	</update>
+		    
+	<select id="getById" parameterType="java.lang.Long" resultMap="CostType">
+		SELECT <include refid="columns"/>
+		FROM cost_type
+		WHERE
+		id=#{id}
+	</select>
+	
+	<select id="getAll" resultMap="CostType">
+		SELECT <include refid="columns"/>
+		FROM cost_type   
+		<include refid="dynamicWhere" />
+		<if test="@Ognl@isNotEmpty(orderField)">
+		order by ${orderField} ${orderSeq}
+		</if>
+		<if test="@Ognl@isEmpty(orderField)">
+		order by id  remark
+		</if>
+	</select>
+	
+	<select id="getCount">
+		select count(*) from cost_type 
+		<include refid="dynamicWhere" />
+	</select>
+</mapper>

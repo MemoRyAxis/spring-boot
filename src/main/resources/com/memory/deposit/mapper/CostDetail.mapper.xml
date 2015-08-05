@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
-<mapper namespace="com.memory.deposit.domain.CostDetail">
+<mapper namespace="com.memory.deposit.persistence.CostDetailMapper">
 	<resultMap id="CostDetail" type="com.memory.deposit.domain.CostDetail">
 		<id property="id" column="id" jdbcType="NUMERIC"/>
 		<result property="costType" column="cost_type" jdbcType="NUMERIC"/>
@@ -25,7 +25,7 @@
 		</where>
 	</sql>
 
-	<insert id="add" parameterType="com.memory.deposit.domain.CostDetail">
+	<insert id="add" parameterType="com.memory.deposit.domain.CostDetail" keyProperty="id" useGeneratedKeys="true">
 		INSERT INTO cost_detail
 		(id,cost_type,cost,remark,cost_date,create_time)
 		VALUES
@@ -66,5 +66,10 @@
 		<if test="@Ognl@isEmpty(orderField)">
 		order by id  desc
 		</if>
+	</select>
+	
+	<select id="getCount">
+		select count(*) from cost_type 
+		<include refid="dynamicWhere" />
 	</select>
 </mapper>
