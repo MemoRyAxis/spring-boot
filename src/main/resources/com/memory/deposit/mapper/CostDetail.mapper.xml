@@ -7,11 +7,11 @@
 		<result property="cost" column="cost" jdbcType="NUMERIC"/>
 		<result property="remark" column="remark" jdbcType="VARCHAR"/>
 		<result property="costDate" column="cost_date" jdbcType="TIMESTAMP"/>
-		<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+		<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
 	</resultMap>
 
 	<sql id="columns">
-		id,cost_type,cost,remark,cost_date,create_time
+		id,cost_type,cost,remark,cost_date,update_time
 	</sql>
 	
 	<sql id="dynamicWhere">
@@ -21,15 +21,15 @@
 			<if test="@Ognl@isNotEmpty(cost)"> AND cost  =#{cost} </if>
 			<if test="@Ognl@isNotEmpty(remark)"> AND remark  LIKE #{remark}  </if>
 			<if test="@Ognl@isNotEmpty(costDate)"> AND cost_date  =#{costDate} </if>
-			<if test="@Ognl@isNotEmpty(createTime)"> AND create_time  =#{createTime} </if>
+			<if test="@Ognl@isNotEmpty(updateTime)"> AND update_time  =#{updateTime} </if>
 		</where>
 	</sql>
 
 	<insert id="add" parameterType="com.memory.deposit.domain.CostDetail" keyProperty="id" useGeneratedKeys="true">
 		INSERT INTO cost_detail
-		(id,cost_type,cost,remark,cost_date,create_time)
+		(id,cost_type,cost,remark,cost_date,update_time)
 		VALUES
-		(#{id,jdbcType=NUMERIC}, #{costType,jdbcType=NUMERIC}, #{cost,jdbcType=NUMERIC}, #{remark,jdbcType=VARCHAR}, #{costDate,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+		(#{id,jdbcType=NUMERIC}, #{costType,jdbcType=NUMERIC}, #{cost,jdbcType=NUMERIC}, #{remark,jdbcType=VARCHAR}, #{costDate,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
 	</insert>
 	
 	<delete id="delById" parameterType="java.lang.Long">
@@ -43,8 +43,7 @@
 		cost_type=#{costType,jdbcType=NUMERIC},
 		cost=#{cost,jdbcType=NUMERIC},
 		remark=#{remark,jdbcType=VARCHAR},
-		cost_date=#{costDate,jdbcType=TIMESTAMP},
-		create_time=#{createTime,jdbcType=TIMESTAMP}
+		cost_date=#{costDate,jdbcType=TIMESTAMP}
 		WHERE
 		id=#{id}
 	</update>

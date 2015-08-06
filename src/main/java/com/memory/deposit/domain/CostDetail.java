@@ -12,19 +12,11 @@ public class CostDetail extends BaseModel {
 
   private long costType;
 
-  private double cost;
+  private int cost;
 
   private String remark;
 
-  private Date costData;
-
-  public String getRemark() {
-    return remark;
-  }
-
-  public void setRemark(String remark) {
-    this.remark = remark;
-  }
+  private Date costDate;
 
   public long getId() {
     return id;
@@ -42,19 +34,27 @@ public class CostDetail extends BaseModel {
     this.costType = costType;
   }
 
-  public double getCost() {
+  public int getCost() {
     return cost;
   }
 
-  public void setCost(double cost) {
+  public void setCost(int cost) {
     this.cost = cost;
   }
 
-  public Date getCostData() {
-    return costData;
+  public String getRemark() {
+    return remark;
   }
 
-  public void setCostData(Date costData) {
-    this.costData = costData;
+  public void setRemark(String remark) {
+    this.remark = remark;
+  }
+
+  public Date getCostDate() {
+    return costDate;
+  }
+
+  public void setCostDate(Date costDate) {
+    this.costDate = costDate;
   }
 }
