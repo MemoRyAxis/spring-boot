@@ -38,10 +38,10 @@ public class MySQLConfig {
 
     SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
     sqlSessionFactoryBean.setDataSource(getDataSource());
-//    sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
+    // sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
     PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
     sqlSessionFactoryBean.setMapperLocations(resolver
-        .getResources("classpath:/com/memory/*/mapper/*.xml"));
+        .getResources("classpath:/com/memory/user/mapper/*.xml"));
     return sqlSessionFactoryBean.getObject();
   }
 }

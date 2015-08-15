@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.memory.user.domain.User">
+
+	<insert id="add" parameterType="com.memory.user.domain.User">
+		INSERT INTO user(username, password)
+		VALUES (#{username, jdbcType=VARCHAR }, #{password, jdbcType=VARCHAR })
+	</insert>
+	
+	<select id="getById"></select>
+	
+	<select id="getAll"></select>
+	
+	<select id="getCount"></select>
+	
+	<update id="update"></update>
+	
+	<delete id="delById"></delete>
+</mapper>

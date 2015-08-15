@@ -3,10 +3,16 @@ package com.memory.base.model;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * base model
+ *
+ * @date 2015年8月15日上午2:32:28
+ * @author memoryaxis
+ *
+ */
 public class BaseModel implements Serializable {
 
   private static final long serialVersionUID = 1L;
-
 
   protected Long createBy;
 
@@ -47,5 +53,5 @@ public class BaseModel implements Serializable {
   public void setUpdateTime(Date updateTime) {
     this.updateTime = updateTime;
   }
- 
+
 }
