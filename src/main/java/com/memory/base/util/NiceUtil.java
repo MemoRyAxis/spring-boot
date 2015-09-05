@@ -3,11 +3,17 @@ package com.memory.base.util;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * nice ~
+ * 
+ * @author memoryaxis@gmail.com
+ */
 public class NiceUtil {
 
     private static long autoIncrease = 1;
@@ -69,5 +75,13 @@ public class NiceUtil {
             e.printStackTrace();
         }
         return map;
+    }
+
+    public static boolean isEmptyString(String str) {
+        return str == null || str.trim().equals("");
+    }
+
+    public static String getRootPath() {
+        return new File("").getAbsolutePath() + System.getProperty("file.separator");
     }
 }
